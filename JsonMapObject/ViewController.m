@@ -25,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    [self text2];
 }
 
 - (void)didReceiveMemoryWarning {
