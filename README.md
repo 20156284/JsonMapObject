@@ -2,7 +2,8 @@
 Ths is json mapped to object tools 
 
 example 1 ：
- NSDictionary *dictEX = @{
+ 
+  NSDictionary *dictEX = @{
                              @"name" : @"Jack",
                              @"icon" : @"lufy.png",
                              @"Tx":@{
@@ -43,7 +44,9 @@ example 1 ：
     
     
 example 2 ：
-NSDictionary *dict = @{
+
+
+  NSDictionary *dict = @{
                            @"statuses" : @[
                                    @{
                                        @"text" : @"今天天气真不错！",
