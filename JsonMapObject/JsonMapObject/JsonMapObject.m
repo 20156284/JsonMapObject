@@ -13,8 +13,10 @@ static NSSet *foundationClasses;
 
 @implementation JsonMapObject
 
-+(void)load
-{
+/**
+ *  初始化
+ */
++(void)load{
     foundationClasses  = [NSSet setWithObjects:
                           [NSObject class],
                           [NSURL class],
@@ -155,9 +157,15 @@ static NSSet *foundationClasses;
     return newDict;
 }
 
-
-+ (NSString *)returnClassName:(NSString *)className
-{
+/**
+ *  查找类名
+ *
+ *  @param className 字符创类名
+ *
+ *  @return 字符串的名称
+ */
++ (NSString *)returnClassName:(NSString *)className{
+    
     className = [className substringWithRange:NSMakeRange(2, className.length - 3)];
     return className;
 }

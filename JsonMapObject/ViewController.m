@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self text2];
+    [self text1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,8 +66,8 @@
     
     
     Text *text = [JsonMapObject JsonMapObjectWithClassName:@"Text" requestNSDictionay:dictEX replaceNSDictionary:replaceDict];
-    //    NSLog(@"%@",text.name);
-    //    NSLog(@"%@",text.Tx.name);
+    NSLog(@"%@",text.name);
+    NSLog(@"%@",text.Tx.name);
     NSLog(@"%@",text.Tx.TT.ID);
     
     
