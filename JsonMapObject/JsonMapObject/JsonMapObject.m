@@ -80,17 +80,24 @@ static NSSet *foundationClasses;
                 [tempObj setValue:suntempObj forKey:propertyName];
             }
             else if ([value isKindOfClass:[NSArray class]]){
-                NSMutableArray *arrPro = [[NSMutableArray alloc] init];
-                NSArray *arrSun = [dict objectForKey:propertyName];
                 NSDictionary *newDict = [self findKeyfromValue:propertyName withDictionary:replaceDict];
-                for (NSDictionary *sunDict in arrSun) {
-                    Class  suntempClass = [newDict objectForKey:propertyName];
-                    NSString *strClassName = [NSString stringWithCString:object_getClassName(suntempClass) encoding:NSUTF8StringEncoding];
-                    id suntempObj = [[suntempClass alloc] init];
-                    suntempObj = [self JsonMapObjectWithClassName:strClassName requestNSDictionay:sunDict replaceNSDictionary:replaceDict];
-                    [arrPro addObject:suntempObj];
+                if ([newDict objectForKey:propertyName] != nil) {
+                    NSMutableArray *arrPro = [[NSMutableArray alloc] init];
+                    NSArray *arrSun = [dict objectForKey:propertyName];
+                    
+                    for (NSDictionary *sunDict in arrSun) {
+                        Class  suntempClass = [newDict objectForKey:propertyName];
+                        NSString *strClassName = [NSString stringWithCString:object_getClassName(suntempClass) encoding:NSUTF8StringEncoding];
+                        id suntempObj = [[suntempClass alloc] init];
+                        suntempObj = [self JsonMapObjectWithClassName:strClassName requestNSDictionay:sunDict replaceNSDictionary:replaceDict];
+                        [arrPro addObject:suntempObj];
+                    }
+                    [tempObj setValue:arrPro forKey:propertyName];
                 }
-                [tempObj setValue:arrPro forKey:propertyName];
+                else
+                {
+                    [tempObj setValue:value forKey:propertyName];
+                }
             }
             else{
                 [tempObj setValue:value forKey:propertyName];
