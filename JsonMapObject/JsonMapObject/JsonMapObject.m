@@ -79,6 +79,20 @@ static NSSet *foundationClasses;
                 suntempObj = [self JsonMapObjectWithClassName:[self returnClassName:propertyType] requestNSDictionay:value replaceNSDictionary:replaceDict];
                 [tempObj setValue:suntempObj forKey:propertyName];
             }
+            else if ([value isKindOfClass:[NSDictionary class]])
+            {
+                NSDictionary *newDict = [self findKeyfromValue:propertyName withDictionary:replaceDict];
+                if ([newDict objectForKey:propertyName] != nil) {
+                    Class  suntempClass =  [newDict objectForKey:propertyName];
+                    id suntempObj = [[suntempClass alloc] init];
+                    suntempObj = [self JsonMapObjectWithClassName:[self returnClassName:propertyType] requestNSDictionay:value replaceNSDictionary:replaceDict];
+                    [tempObj setValue:suntempObj forKey:propertyName];
+                }
+                else
+                {
+                    [tempObj setValue:value forKey:propertyName];
+                }
+            }
             else if ([value isKindOfClass:[NSArray class]]){
                 NSDictionary *newDict = [self findKeyfromValue:propertyName withDictionary:replaceDict];
                 if ([newDict objectForKey:propertyName] != nil) {
