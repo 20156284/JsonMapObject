@@ -113,6 +113,10 @@ static NSSet *foundationClasses;
                     [tempObj setValue:value forKey:propertyName];
                 }
             }
+            else if ([value isKindOfClass:[NSString class]])
+            {
+                [tempObj setValue:[self verificationNoNUll:value] forKey:propertyName];
+            }
             else{
                 [tempObj setValue:value forKey:propertyName];
             }
@@ -137,6 +141,10 @@ static NSSet *foundationClasses;
                 id suntempObj = [[suntempClass alloc] init];
                 suntempObj = [self JsonMapObjectWithClassName:[self returnClassName:propertyType] requestNSDictionay:value replaceNSDictionary:replaceDict];
                 [tempObj setValue:suntempObj forKey:propertyName];
+            }
+            else if ([value isKindOfClass:[NSString class]])
+            {
+                [tempObj setValue:[self verificationNoNUll:value] forKey:propertyName];
             }
             else{
                 [tempObj setValue:value forKey:propertyName];
@@ -208,5 +216,26 @@ static NSSet *foundationClasses;
     typeClass = NSClassFromString(strClass);
     
     return [foundationClasses containsObject:typeClass];
+}
+
+
+/**
+ *  验证返回的字符串是否空 预防出错
+ *
+ *  @param str 是要验证的字符串
+ *
+ *  @return 被验证后的字符串
+ */
++ (NSString *)verificationNoNUll :(NSString *)str
+{
+    NSString *retuStr=@"";
+    if ([str isEqual:[NSNull null]] || [str isEqualToString:@""] || str == nil) {
+        return retuStr;
+    }
+    else
+    {
+        retuStr = str;
+        return retuStr;
+    }
 }
 @end
